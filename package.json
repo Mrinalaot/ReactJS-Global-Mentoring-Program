@@ -1,0 +1,47 @@
+{
+  "name": "reactjs-global-mentoring-program",
+  "version": "1.0.0",
+  "description": "ReactJS-Global-Mentoring-Program",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development webpack serve --open",
+    "build:dev": "webpack --env dev --progress",
+    "build:prod": "webpack --env prod --progress",
+    "test": "jest src --passWithNoTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mrinalaot/ReactJS-Global-Mentoring-Program.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mrinalaot/ReactJS-Global-Mentoring-Program/issues"
+  },
+  "homepage": "https://github.com/Mrinalaot/ReactJS-Global-Mentoring-Program#readme",
+  "dependencies": {
+    "jest": "^26.6.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.17",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/plugin-transform-runtime": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.2",
+    "file-loader": "^6.1.0",
+    "html-loader": "^2.0.0",
+    "html-webpack-plugin": "^5.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.23.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
