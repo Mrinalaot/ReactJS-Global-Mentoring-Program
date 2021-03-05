@@ -22,7 +22,12 @@ h6 {
     background-size: 800px 400px;
     max-width: 800px;
     margin: 0 auto;
-    padding: 1px 55px 10px 55px;
+    padding: 10px 55px 10px 55px;
+}
+
+.my-modal{
+    background-color: transparent !important;
+    max-height: unset !important;
 }
 
 .movies-list {
@@ -86,6 +91,18 @@ bar:after {
 .thumbnails-details {
     display: block;
     width: 170px;
+}
+
+.title-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-menu {
+    flex-direction: row-reverse !important;
+    background: transparent;
+    width: 256px;
+    position: absolute !important;
 }
 
 .movie-title {
