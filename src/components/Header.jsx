@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import Title from './Title'
 import CONSTANTS from '../constants/constants'
-
+import AddMovie from './AddMovie'
+import AddOrEditMovie from './AddOrEditMovie'
 class Header extends Component {
     state = {
         searchBy: 'title',
         searchStr: '',
+        showAddMovie: false,
     }
 
     handleSearchByClick = (event) => {
@@ -38,6 +40,21 @@ class Header extends Component {
         }
     }
 
+    onAddMovieClick = () => {
+        this.setState({
+            showAddMovie: true,
+        })
+    }
+
+    onClose = () => {
+        this.setState({ showAddMovie: false })
+    }
+
+    onAddMovieSubmit = () => {
+        // this.setState({ showAddMovie: false })
+        alert('Submitted')
+    }
+
     render() {
         const { searchBy } = this.state
 
@@ -53,7 +70,15 @@ class Header extends Component {
 
         return (
             <header className="header">
-                <Title />
+                  <div className="title-container">
+                    <Title />
+                    <AddMovie add={this.onAddMovieClick} />
+                    {this.state.showAddMovie ? (
+                        <AddOrEditMovie show={this.state.showAddMovie} onClose={this.onClose} onSubmit={this.onAddMovieSubmit} />
+                    ) : (
+                        ''
+                    )}
+                </div>
                 <h4 className="white-text text-darken-2">{CONSTANTS.FIND}</h4>
                 <input
                     type="text"

@@ -12,6 +12,13 @@ const CONSTANTS = {
     RELEASE: "release date",
     SORT: "Sort by",
     MOVIE_API_BASE_URL: 'http://react-cdp-api.herokuapp.com/movies',
+    EDIT: 'Edit',
+    DELETE: 'Delete',
+    ADD_MOVIE: '+ADD MOVIE',
+    RESET: 'RESET',
+    SUBMIT: 'SUBMIT',
+    ADD_MOVIE_TITLE: 'ADD MOVIE',
+    EDIT_MOVIE_TITLE: 'EDIT MOVIE',
   };
   
   export default CONSTANTS;

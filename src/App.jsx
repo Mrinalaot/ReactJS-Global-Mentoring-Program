@@ -3,12 +3,14 @@ import classNames from 'classnames'
 import './style.css'
 import 'materialize-css'
 import 'materialize-css/dist/css/materialize.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import SearchPage from './components/SearchPage'
 import axios from 'axios'
+import movies from './constants/movies'
 
 class App extends Component {
     state = {
-        data: [],
+        data: movies.slice(0, 9),
         isLoading: false,
     }
 
