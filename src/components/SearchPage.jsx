@@ -6,13 +6,13 @@ import Content from './Content'
 import Footer from './Footer'
 import ErrorBoundary from './ErrorBoundary'
 
-const SearchPage = ({ movies, refreshResults }) => {
+const SearchPage = ({ movies, refreshResults, setSelectedMovie }) => {
     return (
         <div>
             <Header refreshResults={refreshResults} />
             <Results items={movies.length} />
             <ErrorBoundary>
-                <Content movies={movies} />
+                <Content movies={movies} setSelectedMovie={setSelectedMovie}/>
             </ErrorBoundary>
             <Footer />
         </div>
@@ -22,6 +22,7 @@ const SearchPage = ({ movies, refreshResults }) => {
 Content.propTypes = {
     movies: PropTypes.array,
     refreshResults: PropTypes.func,
+    setSelectedMovie: PropTypes.func,
 }
 
 export default SearchPage

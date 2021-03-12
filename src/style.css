@@ -23,9 +23,13 @@ h6 {
     max-width: 800px;
     margin: 0 auto;
     padding: 10px 55px 10px 55px;
+    min-height: 293px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.my-modal{
+.my-modal {
     background-color: transparent !important;
     max-height: unset !important;
 }
@@ -38,6 +42,40 @@ h6 {
     margin: 0 auto;
     padding: 5px 5px;
     max-width: 800px;
+}
+
+.filters {
+    width: 800px;
+    height: 50px;
+    margin: 0 auto !important;
+}
+
+.filters li {
+    width: 15% !important;
+}
+
+.filters li:hover {
+    text-decoration: underline;
+    background-color: yellow;
+}
+
+.filters li:focus {
+    text-decoration: underline;
+    background-color: #922d46 !important;
+}
+
+.select {
+    margin: auto !important;
+}
+
+.sort-section {
+    align-self: center;
+}
+
+hr {
+    max-width: 800px;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
 }
 
 .not-found {
@@ -84,16 +122,21 @@ bar:after {
 
 .thumbnails {
     display: block;
-    width: 256px;
+    width: 246px;
     cursor: pointer;
+}
+
+.movie-card {
+    padding: 5px !important;
 }
 
 .thumbnails-details {
     display: block;
     width: 170px;
+    min-height: 255px;
 }
 
-.title-container{
+.title-container {
     display: flex;
     justify-content: space-between;
 }
@@ -103,6 +146,12 @@ bar:after {
     background: transparent;
     width: 256px;
     position: absolute !important;
+    box-shadow: none;
+    padding: 0px;
+}
+
+svg {
+    font-size: 24px;
 }
 
 .movie-title {
@@ -201,6 +250,14 @@ bar:after {
     display: inline;
 }
 
+.release-date-runtime {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 150px;
+    font-weight: bolder;
+}
+
 .avg-rating {
     display: inline;
     border: 1px solid white;
@@ -209,7 +266,7 @@ bar:after {
     margin-left: 5px;
 }
 
-.none{
+.none {
     display: none;
 }
 /* Absolute Center Spinner */
