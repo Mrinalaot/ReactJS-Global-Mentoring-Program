@@ -5,19 +5,21 @@ import Content from './Content';
 import Footer from './Footer';
 import MovieDetails from './MovieDetails';
 
-const SearchPage = ({ movies }) => {
-  return (
-    <div>
-        <MovieDetails movie={movies[0]} />
-        <Results items={movies.length} />
-        <Content movies={movies} />
-        <Footer />
-    </div>
-  )
+const MoviePage = ({ movies, setSelectedMovie, selectedMovie }) => {
+    return (
+        <div>
+            <MovieDetails movie={selectedMovie} />
+            <Results items={movies.length} />
+            <Content movies={movies} setSelectedMovie={setSelectedMovie} />
+            <Footer />
+        </div>
+    )
 }
 
-SearchPage.propTypes = {
-  movies: PropTypes.object
-};
+MoviePage.propTypes = {
+    movies: PropTypes.array,
+    setSelectedMovie: PropTypes.func,
+    selectedMovie: PropTypes.object,
+}
 
-export default SearchPage;
+export default MoviePage

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, Modal, Form } from 'react-bootstrap'
-import CONSTANTS from '../constants/constants'
+import { Button, Modal } from 'react-bootstrap'
 
 const DeleteMovie = ({ show, onClose, onSubmit, mode = 'add' }) => {
     const handleClose = () => onClose()
@@ -17,7 +16,7 @@ const DeleteMovie = ({ show, onClose, onSubmit, mode = 'add' }) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button className="red lighten-1 btn right">CONFIRM</Button>
+                    <Button className="red lighten-1 btn right" onClick={handleSubmit}>CONFIRM</Button>
                 </Modal.Footer>
             </Modal>
         </>
