@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CONSTANTS from '../constants/constants'
 import { Navbar, NavDropdown, Nav } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { setMode } from '../store/actions/ActionCreators'
 
 const dotMenu = (
     <span className="white-text">
@@ -21,28 +23,28 @@ const dotMenu = (
     </span>
 )
 
-const Menu = ({edit: editFn, delete: deleteFn}) => (
-    <>
-        <Navbar className="nav-menu">
-            <Nav>
-                <NavDropdown title={dotMenu}>
-                    <NavDropdown.Item onClick={editFn}>
-                        {CONSTANTS.EDIT}
-                    </NavDropdown.Item>
-                    <NavDropdown.Item onClick={deleteFn}>
-                        {CONSTANTS.DELETE}
-                    </NavDropdown.Item>
-                </NavDropdown>
-            </Nav>
-        </Navbar>
-    </>
-)
-
-Menu.propTypes = {
-    movies: PropTypes.array,
-    refreshResults: PropTypes.func,
-    edit: PropTypes.func,
-    delete: PropTypes.func,
+const Menu = () => {
+    const dispatch = useDispatch()
+    return (
+        <>
+            <Navbar className="nav-menu">
+                <Nav>
+                    <NavDropdown title={dotMenu}>
+                        <NavDropdown.Item
+                            onClick={() => dispatch(setMode('edit'))}
+                        >
+                            {CONSTANTS.EDIT}
+                        </NavDropdown.Item>
+                        <NavDropdown.Item
+                            onClick={() => dispatch(setMode('delete'))}
+                        >
+                            {CONSTANTS.DELETE}
+                        </NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
+            </Navbar>
+        </>
+    )
 }
 
 export default Menu

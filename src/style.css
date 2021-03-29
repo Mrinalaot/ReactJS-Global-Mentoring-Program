@@ -54,6 +54,28 @@ h6 {
     width: 15% !important;
 }
 
+.search-phrase-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-phrase {
+    padding: 10px;
+    margin: 10px;
+    background-color: salmon;
+}
+
+.results-for-section {
+    display: flex;
+    align-items: center;
+}
+
+.search-by-section {
+    display: flex;
+    align-items: center;
+}
+
 .filters li:hover {
     text-decoration: underline;
     background-color: yellow;

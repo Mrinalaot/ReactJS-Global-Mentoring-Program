@@ -3,40 +3,27 @@ import PropTypes from 'prop-types'
 import Menu from './Menu'
 import AddOrEditMovie from './AddOrEditMovie'
 import DeleteMovie from './DeleteMovie'
+import { selectMovie } from '../store/actions/ActionCreators'
+import { connect, useDispatch, useSelector } from 'react-redux'
 
-const Item = ({ movie, setSelectedMovie }) => {
-    const [mode, setMode] = useState('')
+const Item = ({ movie }) => {
+    const dispatch = useDispatch()
 
-    const onMovieEdit = () => setMode('edit')
-    const onMovieDelete = () => setMode('delete')
-
-    const onClose = () => setMode('')
-
-    const onSelectMovie = () => {
-        setSelectedMovie(movie)
-    }
+    const mode = useSelector((state) => state.movies.mode)
 
     const genres = movie.genres.join(' & ')
 
     return (
         <div className="card-panel hoverable movie-card">
-            <Menu edit={onMovieEdit} delete={onMovieDelete} />
-            <AddOrEditMovie
-                show={['add', 'edit'].includes(mode)}
-                mode={mode}
-                onClose={onClose}
-            />
-            <DeleteMovie
-                show={['delete'].includes(mode)}
-                mode={mode}
-                onClose={onClose}
-            />
+            <Menu />
+            <AddOrEditMovie show={['add', 'edit'].includes(mode)} />
+            <DeleteMovie show={['delete'].includes(mode)} />
             <div>
                 <img
                     src={movie.poster_path}
                     className="thumbnails"
                     alt={movie.overview}
-                    onClick={onSelectMovie}
+                    onClick={() => dispatch(selectMovie(movie))}
                 />
             </div>
             <div className="details">
@@ -50,7 +37,6 @@ const Item = ({ movie, setSelectedMovie }) => {
 
 Item.propTypes = {
     movie: PropTypes.object,
-    setSelectedMovie: PropTypes.func,
 }
 
 export default Item

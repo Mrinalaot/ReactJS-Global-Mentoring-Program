@@ -1,17 +1,20 @@
 import React from 'react'
 import CONSTANTS from '../constants/constants'
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { setMode } from '../store/actions/ActionCreators'
 
-const AddMovie = ({ add }) => (
-    <>
-        <button className="red lighten-1 btn right" onClick={add}>
-            {CONSTANTS.ADD_MOVIE}
-        </button>
-    </>
-)
-
-AddMovie.propTypes = {
-    add: PropTypes.func
+const AddMovie = () => {
+    const dispatch = useDispatch()
+    return (
+        <>
+            <button
+                className="red lighten-1 btn right"
+                onClick={() => dispatch(setMode('add'))}
+            >
+                {CONSTANTS.ADD_MOVIE}
+            </button>
+        </>
+    )
 }
 
 export default AddMovie

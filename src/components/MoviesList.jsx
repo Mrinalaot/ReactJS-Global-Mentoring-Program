@@ -1,14 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Item from './Item';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Item from './Item'
 
-const MoviesList = ({ movies, setSelectedMovie }) => (
+const MoviesList = ({ movies }) => (
     <div className="movies-list">
         {movies.map((movie) => (
             <Item
                 movie={movie}
                 key={movie.id}
-                setSelectedMovie={setSelectedMovie}
             />
         ))}
     </div>
@@ -16,7 +15,6 @@ const MoviesList = ({ movies, setSelectedMovie }) => (
 
 MoviesList.propTypes = {
     movies: PropTypes.array,
-    setSelectedMovie: PropTypes.func,
 }
 
 export default MoviesList
