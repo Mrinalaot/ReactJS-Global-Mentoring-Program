@@ -1,11 +1,23 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
-import { setMode } from '../store/actions/ActionCreators'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteMovie, setMode } from '../store/actions/ActionCreators'
 
 const DeleteMovie = ({ show }) => {
     const dispatch = useDispatch()
+    const selectedMovie = useSelector(state => state.movies.selectedMovie)
+
+    const onClickDelete = () => {
+        console.log(selectedMovie);
+        try {
+            dispatch(deleteMovie(selectedMovie.id));
+            dispatch(setMode('none'))
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <>
@@ -24,7 +36,7 @@ const DeleteMovie = ({ show }) => {
                 <Modal.Footer>
                     <Button
                         className="red lighten-1 btn right"
-                        onClick={() => dispatch(setMode('none'))}
+                        onClick={() => onClickDelete()}
                     >
                         CONFIRM
                     </Button>

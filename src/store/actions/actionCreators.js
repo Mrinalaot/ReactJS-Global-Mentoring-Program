@@ -39,13 +39,6 @@ export const selectMovie = (movie) => ({
     movie,
 })
 
-export const persistLastSearchPhrase = (lastSearchPhrase) => {
-    return {
-        type: ACTION_TYPES.PERSIST_LAST_SEARCH_PHRASE,
-        lastSearchPhrase,
-    }
-}
-
 export const loadMovieDetailsSuccess = (movie) => ({
     type: ACTION_TYPES.LOAD_MOVIE_DETAILS_SUCCESS,
     movie,
@@ -96,8 +89,52 @@ export const loadMovies = () => async (dispatch, getState) => {
         })
 }
 
+export const deleteMovie = (id) => async (dispatch) => {
+    const url = `${CONSTANTS.baseURL}/${id}`
+    dispatch(setIsLoading(true))
+    return axios
+        .delete(url)
+        .then(() => {
+            dispatch(loadMovies())
+        })
+        .catch((error) => {
+            throw new Error(error)
+        })
+        .finally(() => dispatch(setIsLoading(false)))
+}
+
+export const updateMovie = (movie) => async (dispatch) => {
+    const url = `${CONSTANTS.baseURL}`
+    dispatch(setIsLoading(true))
+    return axios
+        .put(url, movie)
+        .then((movie) => {
+            dispatch(loadMovieDetailsSuccess(movie))
+            dispatch(loadMovies())
+        })
+        .catch((error) => {
+            throw new Error(error)
+        })
+        .finally(() => dispatch(setIsLoading(false)))
+}
+
+export const createMovie = (movie) => async (dispatch) => {
+    const url = `${CONSTANTS.baseURL}`
+    dispatch(setIsLoading(true))
+    return axios
+        .post(url, movie)
+        .then((movie) => {
+            dispatch(loadMovieDetailsSuccess(movie))
+            dispatch(loadMovies())
+        })
+        .catch((error) => {
+            throw new Error(error)
+        })
+        .finally(() => dispatch(setIsLoading(false)))
+}
+
 export const getMovie = (id) => async (dispatch) => {
-    const url = `${baseURL}/${id}`
+    const url = `${CONSTANTS.baseURL}/${id}`
     return axios
         .get(url)
         .then((movie) => {

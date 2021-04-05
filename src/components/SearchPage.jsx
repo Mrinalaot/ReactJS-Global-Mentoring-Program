@@ -1,13 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Header from './Header'
 import Results from './Results'
 import Content from './Content'
 import Footer from './Footer'
 import ErrorBoundary from './ErrorBoundary'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { loadMovies, searchMovieChange } from '../store/actions/ActionCreators'
 
-const SearchPage = () => {
+const SearchPage = ({ match, location }) => {
+    const dispatch = useDispatch();
+    const phrase = match && match.params && match.params.query;
+    dispatch(searchMovieChange(phrase))
+
+    useEffect(() => {
+        dispatch(loadMovies());
+    }, [phrase])
+
     const movies = useSelector((state) => state.movies.data)
     return (
         <div>

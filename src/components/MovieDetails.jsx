@@ -1,22 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import CONSTANTS from '../constants/constants'
-import { useDispatch } from 'react-redux'
-import { selectMovie } from '../store/actions/ActionCreators'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMovie, searchMovieChange, selectMovie } from '../store/actions/ActionCreators'
+import { Link } from 'react-router-dom';
 
-const MovieDetails = ({ movie }) => {
-    const dispatch = useDispatch()
+const MovieDetails = ({ match }) => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const id = match && match.params && match.params.id;
+        dispatch(getMovie(id));
+    }, [])
+
+    const movie = useSelector((state) => state.movies.selectedMovie)
+
+    const onSearchClick = () => {
+        dispatch(selectMovie(''));
+        dispatch(searchMovieChange(''))
+    }
 
     const MovieDetails = movie ? (
         <div className="movie-wrapper">
             <div className="movie-header">
                 <h5 className="red-text text-darken-2">{CONSTANTS.NETFLIX}</h5>
-                <button
+                <Link to="/search/" style={{ textDecoration: 'none', color: 'inherit' }}><button
                     className="red lighten-1 btn right"
-                    onClick={() => dispatch(selectMovie(null))}
+                    onClick={() => onSearchClick()}
                 >
                     {CONSTANTS.SEARCH}
-                </button>
+                </button></Link>
             </div>
             <div className="movie-poster">
                 <img className="thumbnails-details" src={movie.poster_path} />

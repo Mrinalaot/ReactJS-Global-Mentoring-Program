@@ -19,7 +19,9 @@ const CONSTANTS = {
     ADD_MOVIE_TITLE: 'ADD MOVIE',
     EDIT_MOVIE_TITLE: 'EDIT MOVIE',
     RESULTS_FOR: 'RESULTS FOR',
-    baseURL: 'http://react-cdp-api.herokuapp.com/movies',
+    PLEASE_SEARCH: 'Welcome to Netflix, Please search for your movies',
+    NOT_FOUND_404: '404 Not Found',
+    baseURL: 'http://localhost:4000/movies',
 }
 
 export default CONSTANTS

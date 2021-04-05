@@ -1,9 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import CONSTANTS from '../constants/constants'
 import { Navbar, NavDropdown, Nav } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { setMode } from '../store/actions/ActionCreators'
+import { selectMovie, setMode } from '../store/actions/ActionCreators'
 
 const dotMenu = (
     <span className="white-text">
@@ -23,20 +22,24 @@ const dotMenu = (
     </span>
 )
 
-const Menu = () => {
-    const dispatch = useDispatch()
+const Menu = ({ movie }) => {
+    const dispatch = useDispatch();
+    const onClickMenuOption = (option) => {
+        dispatch(selectMovie(movie))
+        dispatch(setMode(option))
+    }
     return (
         <>
             <Navbar className="nav-menu">
                 <Nav>
                     <NavDropdown title={dotMenu}>
                         <NavDropdown.Item
-                            onClick={() => dispatch(setMode('edit'))}
+                            onClick={() => onClickMenuOption('edit')}
                         >
                             {CONSTANTS.EDIT}
                         </NavDropdown.Item>
                         <NavDropdown.Item
-                            onClick={() => dispatch(setMode('delete'))}
+                            onClick={() => onClickMenuOption('delete')}
                         >
                             {CONSTANTS.DELETE}
                         </NavDropdown.Item>

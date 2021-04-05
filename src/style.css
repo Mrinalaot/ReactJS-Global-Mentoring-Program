@@ -112,6 +112,18 @@ hr {
     margin: 0 auto;
 }
 
+.landing-page {
+    background: #fff;
+    margin: 0 auto;
+    max-width: 800px;
+    max-height: 200px;
+}
+
+.landing-page-message {
+    padding: 80px;
+    margin: 0 auto;
+}
+
 .bar {
     margin: 0 auto;
     max-width: 800px;
