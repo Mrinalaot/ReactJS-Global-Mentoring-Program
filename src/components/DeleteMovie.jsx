@@ -1,13 +1,19 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
+import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { setMode } from '../store/actions/ActionCreators'
 
-const DeleteMovie = ({ show, onClose, onSubmit, mode = 'add' }) => {
-    const handleClose = () => onClose()
-    const handleSubmit = () => onSubmit()
+const DeleteMovie = ({ show }) => {
+    const dispatch = useDispatch()
 
     return (
         <>
-            <Modal className="my-modal" show={show} onHide={handleClose}>
+            <Modal
+                className="my-modal"
+                show={show}
+                onHide={() => dispatch(setMode('none'))}
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>DELETE MOVIE</Modal.Title>
                 </Modal.Header>
@@ -16,11 +22,20 @@ const DeleteMovie = ({ show, onClose, onSubmit, mode = 'add' }) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button className="red lighten-1 btn right" onClick={handleSubmit}>CONFIRM</Button>
+                    <Button
+                        className="red lighten-1 btn right"
+                        onClick={() => dispatch(setMode('none'))}
+                    >
+                        CONFIRM
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
     )
+}
+
+DeleteMovie.propTypes = {
+    show: PropTypes.bool,
 }
 
 export default DeleteMovie

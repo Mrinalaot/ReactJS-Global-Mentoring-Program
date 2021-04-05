@@ -1,19 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import MoviesList from './MoviesList';
-import ErrorMessage from './ErrorMessage';
-import CONSTANTS from '../constants/constants';
+import React from 'react'
+import PropTypes from 'prop-types'
+import MoviesList from './MoviesList'
+import ErrorMessage from './ErrorMessage'
+import CONSTANTS from '../constants/constants'
+import { useSelector } from 'react-redux'
 
-const Content = ({ movies, setSelectedMovie }) => {
+const Content = () => {
+    const movies = useSelector((state) => state.movies.data)
+
     const moviesFound = movies.length > 0
     return (
         <React.Fragment>
-            {moviesFound && (
-                <MoviesList
-                    movies={movies}
-                    setSelectedMovie={setSelectedMovie}
-                />
-            )}
+            {moviesFound && <MoviesList movies={movies} />}
             {!moviesFound && (
                 <ErrorMessage message={CONSTANTS.NO_FILMS_FOUND} />
             )}
@@ -21,9 +19,4 @@ const Content = ({ movies, setSelectedMovie }) => {
     )
 }
 
-Content.propTypes = {
-    movies: PropTypes.array,
-    setSelectedMovie: PropTypes.func,
-}
-
-export default Content;
+export default Content

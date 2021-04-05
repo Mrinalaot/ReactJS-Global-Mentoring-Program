@@ -5,24 +5,20 @@ import Results from './Results'
 import Content from './Content'
 import Footer from './Footer'
 import ErrorBoundary from './ErrorBoundary'
+import { useSelector } from 'react-redux'
 
-const SearchPage = ({ movies, refreshResults, setSelectedMovie }) => {
+const SearchPage = () => {
+    const movies = useSelector((state) => state.movies.data)
     return (
         <div>
-            <Header refreshResults={refreshResults} />
+            <Header />
             <Results items={movies.length} />
             <ErrorBoundary>
-                <Content movies={movies} setSelectedMovie={setSelectedMovie}/>
+                <Content movies={movies} />
             </ErrorBoundary>
             <Footer />
         </div>
     )
-}
-
-Content.propTypes = {
-    movies: PropTypes.array,
-    refreshResults: PropTypes.func,
-    setSelectedMovie: PropTypes.func,
 }
 
 export default SearchPage

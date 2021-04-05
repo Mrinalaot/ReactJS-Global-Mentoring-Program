@@ -1,12 +1,8 @@
-import React from 'react';
-import CONSTANTS from '../constants/constants';
+import React from 'react'
+import CONSTANTS from '../constants/constants'
 
 const Title = () => {
-  return (
-    <div>
-      <h5 className="red-text text-darken-2">{CONSTANTS.NETFLIX}</h5>
-    </div>
-  )
+    return <h5 className="red-text text-darken-2">{CONSTANTS.NETFLIX}</h5>
 }
 
-export default Title;
+export default Title

@@ -1,13 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CONSTANTS from '../constants/constants';
+import React from 'react'
+import PropTypes from 'prop-types'
+import CONSTANTS from '../constants/constants'
+import { useDispatch } from 'react-redux'
+import { selectMovie } from '../store/actions/ActionCreators'
 
 const MovieDetails = ({ movie }) => {
+    const dispatch = useDispatch()
+
     const MovieDetails = movie ? (
         <div className="movie-wrapper">
             <div className="movie-header">
                 <h5 className="red-text text-darken-2">{CONSTANTS.NETFLIX}</h5>
-                <button className="red lighten-1 btn right">
+                <button
+                    className="red lighten-1 btn right"
+                    onClick={() => dispatch(selectMovie(null))}
+                >
                     {CONSTANTS.SEARCH}
                 </button>
             </div>
