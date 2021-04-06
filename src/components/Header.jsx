@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import Title from './Title'
 import CONSTANTS from '../constants/constants'
@@ -11,6 +11,7 @@ import {
     searchMovieChange,
     searchBy as setSearchBy,
 } from '../store/actions/ActionCreators'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
     const searchBy = useSelector((state) => state.search.searchby)
@@ -40,11 +41,7 @@ const Header = () => {
             <div className="title-container">
                 <Title />
                 <AddMovieButton />
-                {['add', 'edit'].includes(mode) ? (
-                    <AddOrEditMovie show={['add', 'edit'].includes(mode)} />
-                ) : (
-                    ''
-                )}
+                <AddOrEditMovie show={['add', 'edit'].includes(mode)} />
             </div>
             <div>
                 <h4 className="white-text text-darken-2">{CONSTANTS.FIND}</h4>
@@ -59,9 +56,8 @@ const Header = () => {
                 />
                 <button
                     className="red lighten-1 btn right"
-                    onClick={() => dispatch(loadMovies())}
                 >
-                    {CONSTANTS.SEARCH}
+                    <Link to={`/search/${phrase}`} style={{ textDecoration: 'none', color: 'inherit' }}>{CONSTANTS.SEARCH}</Link>
                 </button>
             </div>
             <div className="search-phrase-section">

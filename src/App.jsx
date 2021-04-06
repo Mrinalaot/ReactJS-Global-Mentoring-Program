@@ -5,14 +5,16 @@ import 'materialize-css'
 import 'materialize-css/dist/css/materialize.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import SearchPage from './components/SearchPage'
-import MoviePage from './components/MoviePage'
+import LandingPage from './components/LandingPage'
 import { useDocumentTitle } from './components/CustomHooks'
 import CONSTANTS from './constants/constants'
 import { useSelector } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
+import MovieDetails from './components/MovieDetails'
+import NotFound404Page from './components/404NotFoundPage'
 
 const App = () => {
     const isLoading = useSelector((state) => state.movies.isLoading)
-    const selectedMovie = useSelector((state) => state.movies.selectedMovie)
     const data = useSelector((state) => state.movies.data)
 
     useDocumentTitle(CONSTANTS.NETFLIX)
@@ -25,11 +27,12 @@ const App = () => {
     return (
         <React.Fragment>
             <div className={loading}>Loading&#8230;</div>
-            {!selectedMovie ? (
-                <SearchPage movies={data} />
-            ) : (
-                <MoviePage movies={data} />
-            )}
+            <Switch>
+                <Route path='/search/:query' exact={false} component={SearchPage} />
+                <Route path='/film/:id' exact component={MovieDetails} />
+                <Route path='/' component={LandingPage} />
+                <Route path='/*' component={NotFound404Page} />
+            </Switch>
         </React.Fragment>
     )
 }
