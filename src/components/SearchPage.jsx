@@ -1,16 +1,17 @@
-import React from 'react'
-import Header from './Header'
-import Results from './Results'
-import Content from './Content'
-import Footer from './Footer'
-import ErrorBoundary from './ErrorBoundary'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import { loadMovies, searchMovieChange } from '../store/actions/ActionCreators'
+import { useDispatch, useSelector } from 'react-redux'
+
+import Content from './Content'
+import ErrorBoundary from './ErrorBoundary'
+import Footer from './Footer'
+import Header from './Header'
+import React from 'react'
+import Results from './Results'
+import { useEffect } from 'react'
 
 const SearchPage = ({ match, location }) => {
     const dispatch = useDispatch();
-    const phrase = match && match.params && match.params.query;
+    const phrase = (match && match.params && match.params.query) || '';
     dispatch(searchMovieChange(phrase))
 
     useEffect(() => {
