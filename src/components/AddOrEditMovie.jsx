@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Button, Modal } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import CONSTANTS from '../constants/constants'
-import { setMode, updateMovie, createMovie } from '../store/actions/ActionCreators'
-
-import PropTypes from 'prop-types'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup';
+
+import { Button, Modal } from 'react-bootstrap'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import React, { useEffect, useState } from 'react'
+import { createMovie, setMode, updateMovie } from '../store/actions/ActionCreators'
+import { useDispatch, useSelector } from 'react-redux'
+
+import CONSTANTS from '../constants/constants'
+import FormikControl from './FormikControl';
+import PropTypes from 'prop-types'
 
 const AddOrEditMovie = ({ show }) => {
     const dispatch = useDispatch()
@@ -22,20 +24,25 @@ const AddOrEditMovie = ({ show }) => {
         title: '',
         release_date: '',
         poster_path: '',
-        genres: '',
+        genres: [],
         overview: '',
         runtime: ''
     }
 
+    const options = [
+        'Action', 'Adventure', 'Thriller', 'Drama', 'Science Fiction'
+    ]
+
     const validationSchema = Yup.object().shape({
         title: Yup.string()
             .required('Title is required'),
-        release_date: Yup.string()
-            .required('Release Date is required'),
+        release_date: Yup.date()
+            .required('Release Date is required')
+            .nullable(),
         poster_path: Yup.string()
             .required('Movie Url is required'),
         genres: Yup.array()
-            .required('Genre is required'),
+            .required('At least genre is required'),
         overview: Yup.string()
             .required('Overview is required'),
         runtime: Yup.number()
@@ -61,6 +68,7 @@ const AddOrEditMovie = ({ show }) => {
     }
 
     function onSubmit(fields, { setStatus }) {
+        console.log(fields)
         setStatus();
         if (isAddMode) {
             addMovie(fields);
@@ -68,6 +76,12 @@ const AddOrEditMovie = ({ show }) => {
             editMovie(fields);
         }
     }
+
+    function handleReset(resetForm) {
+        if (window.confirm('Reset?')) {
+            resetForm();
+        }
+    };
 
     return (
         <Modal
@@ -80,7 +94,8 @@ const AddOrEditMovie = ({ show }) => {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-                {({ dirty, errors, touched, isSubmitting, setFieldValue }) => {
+                {({ dirty, errors, touched, isSubmitting, setFieldValue, ...rest }) => {
+                    console.log(errors)
                     const [movie, setMovie] = useState({});
                     useEffect(() => {
                         if (!isAddMode) {
@@ -110,9 +125,8 @@ const AddOrEditMovie = ({ show }) => {
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col">
-                                            <label>Release Date</label>
-                                            <Field name="release_date" type="text" className={'form-control' + (errors.release_date && touched.release_date ? ' is-invalid' : '')} />
-                                            <ErrorMessage name="release_date" component="div" className="invalid-feedback" />
+                                            <FormikControl control="date-picker" label="Release Date" name="release_date" errors={errors} touched={touched}></FormikControl>
+                                            {/* <ErrorMessage name="release_date" component="div" className="invalid-feedback" /> */}
                                         </div>
                                     </div>
                                     <div className="form-row">
@@ -124,9 +138,10 @@ const AddOrEditMovie = ({ show }) => {
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col">
-                                            <label>Genres</label>
+                                            {/* <label>Genres</label>
                                             <Field name="genres" type="text" className={'form-control' + (errors.genres && touched.genres ? ' is-invalid' : '')} />
-                                            <ErrorMessage name="genres" component="div" className="invalid-feedback" />
+                                            <ErrorMessage name="genres" component="div" className="invalid-feedback" /> */}
+                                            <FormikControl control="checkbox" label="Genres" name="genres" options={options} errors={errors} touched={touched} />
                                         </div>
                                     </div>
                                     <div className="form-row">
@@ -147,7 +162,7 @@ const AddOrEditMovie = ({ show }) => {
                                 <Modal.Footer>
                                     <Button
                                         variant="secondary"
-                                        onClick={() => dispatch(setMode('none'))}
+                                        onClick={handleReset.bind(null, rest.resetForm)}
                                     >
                                         {CONSTANTS.RESET}
                                     </Button>

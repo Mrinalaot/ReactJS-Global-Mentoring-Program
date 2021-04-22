@@ -124,6 +124,22 @@ hr {
     margin: 0 auto;
 }
 
+.custom-checkbox {
+    position: relative !important;
+    opacity: inherit !important;
+}
+
+.checkbox-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-checkbox-group {
+    display: flex;
+    justify-content: space-between;
+}
+
 .bar {
     margin: 0 auto;
     max-width: 800px;
